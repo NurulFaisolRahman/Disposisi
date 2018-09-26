@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="147dp"
+    android:layout_margin="5dp"
+    android:background="#0000FF"
+    android:orientation="vertical"
+    android:id="@+id/ArsipOperator">
+
+    <TextView
+        android:id="@+id/ArsipOperatorSuratDari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Surat dari : "
+        android:textColor="#FFFF00"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/ArsipOperatorNomorSurat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nomor Surat : "
+        android:textColor="#FFFF00"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/ArsipOperatorTanggalSurat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFF00"
+        android:text="Tanggal Surat : "
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:id="@+id/ArsipOperatorDiterimaTanggal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diterima Tanggal : "
+        android:textColor="#FFFF00"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:id="@+id/ArsipOperatorNomorAgenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Agenda: "
+        android:textColor="#FFFF00"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:id="@+id/ArsipOperatorSifat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sifat : "
+        android:textColor="#FFFF00"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/ArsipOperatorPerihal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFF00"
+        android:text="Perihal : "
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp" />
+
+</android.widget.LinearLayout>
