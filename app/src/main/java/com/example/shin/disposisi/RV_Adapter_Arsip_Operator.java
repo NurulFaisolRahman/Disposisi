@@ -14,9 +14,9 @@ import java.util.List;
 public class RV_Adapter_Arsip_Operator extends RecyclerView.Adapter<RV_Adapter_Arsip_Operator.ViewHolderArsipOperator>{
 
     Context ContextArsipOperator;
-    List<Daftar_Arsip_Operator> DataArsipOperator;
+    List<Surat> DataArsipOperator;
 
-    public RV_Adapter_Arsip_Operator(Context contextArsipOperator, List<Daftar_Arsip_Operator> dataArsipOperator) {
+    public RV_Adapter_Arsip_Operator(Context contextArsipOperator, List<Surat> dataArsipOperator) {
         ContextArsipOperator = contextArsipOperator;
         DataArsipOperator = dataArsipOperator;
     }

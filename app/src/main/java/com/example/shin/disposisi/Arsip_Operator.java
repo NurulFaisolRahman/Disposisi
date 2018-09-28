@@ -1,8 +1,10 @@
 package com.example.shin.disposisi;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +25,8 @@ public class Arsip_Operator extends Fragment {
 
     View v;
     private RecyclerView RV_Arsip_Operator;
-    private List<Daftar_Arsip_Operator> DataArsipOperator;
+    private List<Surat> DataArsipOperator;
+    SwipeRefreshLayout Rafresh;
 
     public Arsip_Operator() {
     }
@@ -33,13 +36,29 @@ public class Arsip_Operator extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.arsip_operator,container,false);
         RV_Arsip_Operator = v.findViewById(R.id.RV_ArsipOperator);
+        Rafresh = v.findViewById(R.id.RafreshOperator);
+        Rafresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                TampilkanArsip();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Rafresh.setRefreshing(false);
+                    }
+                }, 2000);
+            }
+        });
         return v;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TampilkanArsip();
+    }
 
+    private void TampilkanArsip(){
         DataArsipOperator = new ArrayList<>();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -48,11 +67,11 @@ public class Arsip_Operator extends Fragment {
                 .build();
 
         ApiArsipOperator apiArsipOperator = retrofit.create(ApiArsipOperator.class);
-        Call<List<Daftar_Arsip_Operator>> call = apiArsipOperator.getData();
+        Call<List<Surat>> call = apiArsipOperator.getData();
 
-        call.enqueue(new Callback<List<Daftar_Arsip_Operator>>() {
+        call.enqueue(new Callback<List<Surat>>() {
             @Override
-            public void onResponse(Call<List<Daftar_Arsip_Operator>> call, Response<List<Daftar_Arsip_Operator>> response) {
+            public void onResponse(Call<List<Surat>> call, Response<List<Surat>> response) {
                 DataArsipOperator = response.body();
                 RV_Adapter_Arsip_Operator RV_adapter = new RV_Adapter_Arsip_Operator(getContext(), DataArsipOperator);
                 RV_Arsip_Operator.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -60,7 +79,7 @@ public class Arsip_Operator extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Daftar_Arsip_Operator>> call, Throwable t) {
+            public void onFailure(Call<List<Surat>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

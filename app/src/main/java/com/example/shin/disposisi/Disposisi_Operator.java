@@ -131,10 +131,8 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
         Cursor cursor = getActivity().getContentResolver().query(uri, null,null,null,null);
         cursor.moveToFirst();
         String document_id = cursor.getString(0);
-
         document_id = document_id.substring(document_id.lastIndexOf(":")+1);
         cursor.close();
-
         cursor = getActivity().getContentResolver().query( MediaStore.Images.Media.EXTERNAL_CONTENT_URI,null,MediaStore.Images.Media._ID+
                 " = ? ", new String[]{document_id},null);
         cursor.moveToFirst();
@@ -145,11 +143,9 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
 
     private void uploadImage(){
         String path = getPath(filePath);
-
         //Uploading code
         try {
             String uploadId = UUID.randomUUID().toString();
-
             //Creating a multi part request
             new MultipartUploadRequest(getContext(), uploadId, UPLOAD_URL)
                     .addFileToUpload(path, "image") //Adding file
@@ -167,7 +163,6 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
         } catch (Exception exc) {
             Toast.makeText(getContext(), exc.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
@@ -181,14 +176,10 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
             nomor_agenda.setText("");
             perihal.setText("");
         }
-
         if (v == c_file) {
             Toast.makeText(getContext(),"pilih gambar", Toast.LENGTH_SHORT).show();
             showFileChooser();
         }
-
-
-
     }
 }
 

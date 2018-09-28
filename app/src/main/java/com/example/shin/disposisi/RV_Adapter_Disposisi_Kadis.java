@@ -9,16 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 public class RV_Adapter_Disposisi_Kadis extends RecyclerView.Adapter<RV_Adapter_Disposisi_Kadis.ViewHolderDisposisiKadis>{
 
     Context ContextDisposisiKadis;
-    List<Daftar_Disposisi_Kadis> DataDisposisiKadis;
+    List<Surat> DataDisposisiKadis;
 
-    public RV_Adapter_Disposisi_Kadis(Context contextDisposisiKadis, List<Daftar_Disposisi_Kadis> dataDisposisiKadis) {
+    public RV_Adapter_Disposisi_Kadis(Context contextDisposisiKadis, List<Surat> dataDisposisiKadis) {
         ContextDisposisiKadis = contextDisposisiKadis;
         DataDisposisiKadis = dataDisposisiKadis;
     }

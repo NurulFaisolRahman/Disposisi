@@ -10,6 +10,6 @@ public interface ApiDisposisiKadis {
     String BASE_URL = "http://192.168.43.223/disposisi/";
 
     @GET("disposisi.php")
-    Call<List<Daftar_Disposisi_Kadis>> getData();
+    Call<List<Surat>> getData();
 
 }

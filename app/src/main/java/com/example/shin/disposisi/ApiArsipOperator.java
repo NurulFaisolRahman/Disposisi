@@ -10,5 +10,5 @@ public interface ApiArsipOperator {
     String BASE_URL = "http://192.168.43.223/disposisi/";
 
     @GET("ArsipOperator.php")
-    Call<List<Daftar_Arsip_Operator>> getData();
+    Call<List<Surat>> getData();
 }

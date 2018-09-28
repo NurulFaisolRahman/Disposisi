@@ -31,14 +31,13 @@ public class Login extends AppCompatActivity {
         nama = findViewById(R.id.nama);
         sandi = findViewById(R.id.sandi);
         Login = findViewById(R.id.Login);
-
         apiInterface = ApiClientLogin.GetApiClient().create(ApiInterfaceLogin.class);
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Nama = nama.getText().toString();
-                Sandi = sandi.getText().toString();
+            Nama = nama.getText().toString();
+            Sandi = sandi.getText().toString();
             Call<User> call = apiInterface.performUserLogin(Nama,Sandi);
             call.enqueue(new Callback<User>() {
                 @Override
@@ -63,7 +62,7 @@ public class Login extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-
+                    Toast.makeText(Login.this, "Mohon Cek Koneksi Internet", Toast.LENGTH_SHORT).show();
                 }
             });
             }
