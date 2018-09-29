@@ -1,11 +1,11 @@
-package com.example.shin.disposisi;
+package com.example.shin.disposisi.FileLogin;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClientLogin {
-    public static final String BASE_URL = "http://192.168.43.223/disposisi/";
-    public static Retrofit retrofit = null;
+    private static final String BASE_URL = "http://192.168.43.223/disposisi/";
+    private static Retrofit retrofit = null;
 
     public static Retrofit GetApiClient(){
         if (retrofit == null){

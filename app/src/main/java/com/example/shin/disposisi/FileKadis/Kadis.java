@@ -1,4 +1,4 @@
-package com.example.shin.disposisi;
+package com.example.shin.disposisi.FileKadis;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,21 +11,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+import com.example.shin.disposisi.FileLogin.Login;
+import com.example.shin.disposisi.R;
 
 public class Kadis extends AppCompatActivity {
-
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private ViewPagerAdapterKadis viewPagerAdapterKadis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kadis);
 
-        tabLayout = findViewById(R.id.TabFragmentKadis);
-        viewPager = findViewById(R.id.ViewPagerKadis);
-        viewPagerAdapterKadis = new ViewPagerAdapterKadis(getSupportFragmentManager());
+        TabLayout tabLayout = findViewById(R.id.TabFragmentKadis);
+        ViewPager viewPager = findViewById(R.id.ViewPagerKadis);
+        ViewPagerAdapterKadis viewPagerAdapterKadis = new ViewPagerAdapterKadis(getSupportFragmentManager());
 
         viewPagerAdapterKadis.TambahFragmentKadis(new Disposisi_Kadis(), "Disposisi");
         viewPagerAdapterKadis.TambahFragmentKadis(new Arsip_Kadis(), "Arsip");
@@ -60,7 +58,7 @@ public class Kadis extends AppCompatActivity {
         SharedPreferences sharedPreferences =getSharedPreferences("login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 
     private void pindahActivity(){

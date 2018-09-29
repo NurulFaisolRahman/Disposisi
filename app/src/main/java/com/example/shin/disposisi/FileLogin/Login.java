@@ -1,4 +1,4 @@
-package com.example.shin.disposisi;
+package com.example.shin.disposisi.FileLogin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import com.example.shin.disposisi.FileBidang.Bidang;
+import com.example.shin.disposisi.FileKadis.Kadis;
+import com.example.shin.disposisi.FileOperator.Operator;
+import com.example.shin.disposisi.FileSeksi.Seksi;
+import com.example.shin.disposisi.R;
+import com.example.shin.disposisi.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,6 +59,16 @@ public class Login extends AppCompatActivity {
                             startActivity(kadis);
                             finish();
                         }
+                        else if (response.body().getTinkatan().equals("bidang")){
+                            Intent Bidang = new Intent(Login.this, Bidang.class);
+                            startActivity(Bidang);
+                            finish();
+                        }
+                        else if (response.body().getTinkatan().equals("seksi")){
+                            Intent Seksi = new Intent(Login.this, Seksi.class);
+                            startActivity(Seksi);
+                            finish();
+                        }
                     }
                     else{
                         Toast.makeText(Login.this, "Nama/Sandi Salah ", Toast.LENGTH_SHORT).show();
@@ -92,6 +107,6 @@ public class Login extends AppCompatActivity {
         editor.putString("Nama", Nama);
         editor.putString("Sandi", Sandi);
         editor.putString("level", level);
-        editor.commit();
+        editor.apply();
     }
 }

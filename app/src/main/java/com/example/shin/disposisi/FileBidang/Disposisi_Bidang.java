@@ -1,4 +1,4 @@
-package com.example.shin.disposisi;
+package com.example.shin.disposisi.FileBidang;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,36 +11,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
+import com.example.shin.disposisi.R;
+import com.example.shin.disposisi.Surat;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Arsip_Operator extends Fragment {
+public class Disposisi_Bidang extends Fragment{
 
     View v;
-    private RecyclerView RV_Arsip_Operator;
-    private List<Surat> DataArsipOperator;
+    private RecyclerView RV_Disposisi_Bidang;
+    private List<Surat> DataDisposisiBidang;
     SwipeRefreshLayout Rafresh;
 
-    public Arsip_Operator() {
+    public Disposisi_Bidang(){
+
     }
 
-    @Nullable
-    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.arsip_operator,container,false);
-        RV_Arsip_Operator = v.findViewById(R.id.RV_ArsipOperator);
-        Rafresh = v.findViewById(R.id.RafreshOperator);
+        v = inflater.inflate(R.layout.disposisi_bidang,container,false);
+        RV_Disposisi_Bidang = v.findViewById(R.id.RV_DisposisiBidang);
+        Rafresh = v.findViewById(R.id.RafreshBidang);
         Rafresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                TampilkanArsip();
+                TampilkanBidang();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -55,27 +54,27 @@ public class Arsip_Operator extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TampilkanArsip();
+        TampilkanBidang();
     }
 
-    private void TampilkanArsip(){
-        DataArsipOperator = new ArrayList<>();
+    private void TampilkanBidang(){
+        DataDisposisiBidang = new ArrayList<>();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiDisposisiKadis.BASE_URL)
+                .baseUrl(ApiDisposisiBidang.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        ApiArsipOperator apiArsipOperator = retrofit.create(ApiArsipOperator.class);
-        Call<List<Surat>> call = apiArsipOperator.getData();
+        ApiDisposisiBidang apiDisposisiBidang = retrofit.create(ApiDisposisiBidang.class);
+        Call<List<Surat>> call = apiDisposisiBidang.getData();
 
         call.enqueue(new Callback<List<Surat>>() {
             @Override
             public void onResponse(Call<List<Surat>> call, Response<List<Surat>> response) {
-                DataArsipOperator = response.body();
-                RV_Adapter_Arsip_Operator RV_adapter = new RV_Adapter_Arsip_Operator(getContext(), DataArsipOperator);
-                RV_Arsip_Operator.setLayoutManager(new LinearLayoutManager(getActivity()));
-                RV_Arsip_Operator.setAdapter(RV_adapter);
+                DataDisposisiBidang = response.body();
+                RV_Adapter_Disposisi_Bidang RV_adapter = new RV_Adapter_Disposisi_Bidang(getContext(),DataDisposisiBidang);
+                RV_Disposisi_Bidang.setLayoutManager(new LinearLayoutManager(getActivity()));
+                RV_Disposisi_Bidang.setAdapter(RV_adapter);
             }
 
             @Override

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.widget.LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,10 +9,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/RafreshKadis">
+        android:id="@+id/RafreshBidang">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/RV_DisposisiKadis"
+            android:id="@+id/RV_DisposisiBidang"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>

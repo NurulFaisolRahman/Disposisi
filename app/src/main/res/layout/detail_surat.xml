@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.widget.LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".FileOperator.DetailSurat">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,13 +21,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textColor="#FFFF00"
                     android:text="Surat Dari" />
                 <EditText
                     android:id="@+id/surat_dari"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"/>
+                    android:textStyle="bold"
+                    android:textColor="#FFFF00"
+                    android:inputType="text"
+                    android:enabled="false"/>
             </TableRow>
             <TableRow android:paddingTop="5dp">
                 <TextView
@@ -33,13 +38,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Tanggal Surat" />
+                    android:textColor="#FFFF00"
+                    android:text="Tanggal surat" />
                 <EditText
                     android:id="@+id/tanggal_surat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="date"/>
+                    android:textStyle="bold"
+                    android:textColor="#FFFF00"
+                    android:inputType="date"
+                    android:enabled="false"/>
             </TableRow>
             <TableRow android:paddingTop="5dp">
                 <TextView
@@ -47,13 +55,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textColor="#FFFF00"
                     android:text="Nomor Surat" />
                 <EditText
                     android:id="@+id/nomor_surat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"/>
+                    android:textStyle="bold"
+                    android:textColor="#FFFF00"
+                    android:inputType="text"
+                    android:enabled="false"/>
             </TableRow>
             <TableRow android:paddingTop="5dp">
                 <TextView
@@ -61,13 +72,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textColor="#FFFF00"
                     android:text="Diterima Tanggal" />
                 <EditText
                     android:id="@+id/diterima_tanggal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="date"/>
+                    android:textStyle="bold"
+                    android:textColor="#FFFF00"
+                    android:inputType="date"
+                    android:enabled="false"/>
             </TableRow>
             <TableRow android:paddingTop="5dp">
                 <TextView
@@ -75,13 +89,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textColor="#FFFF00"
                     android:text="Nomor Agenda" />
                 <EditText
                     android:id="@+id/nomor_agenda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number"/>
+                    android:textStyle="bold"
+                    android:textColor="#FFFF00"
+                    android:inputType="number"
+                    android:enabled="false"/>
             </TableRow>
             <TableRow android:paddingTop="5dp">
                 <TextView
@@ -89,35 +106,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textColor="#FFFF00"
                     android:text="Sifat" />
-                <RadioGroup
-                    android:id="@+id/radio"
+                <EditText
+                    android:id="@+id/sifat"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <RadioButton
-                        android:id="@+id/radioButton4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="5dp"
-                        android:text="Sangat Segera" />
-                    <RadioButton
-                        android:id="@+id/radioButton3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Segera" />
-                    <RadioButton
-                        android:id="@+id/radioButton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="5dp"
-                        android:text="Rahasia" />
-                    <RadioButton
-                        android:id="@+id/radioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="5dp"
-                        android:text="Biasa" />
-                </RadioGroup>
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="#FFFF00"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:enabled="false"/>
             </TableRow>
             <TableRow android:paddingTop="5dp">
                 <TextView
@@ -125,56 +124,58 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textColor="#FFFF00"
                     android:text="Perihal" />
                 <EditText
                     android:id="@+id/perihal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:textStyle="bold"
+                    android:textColor="#FFFF00"
                     android:inputType="text"
-                    android:padding="5dp" />
+                    android:padding="5dp"
+                    android:enabled="false"/>
             </TableRow>
-            <TableRow android:paddingTop="5dp">
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Button
-                    android:id="@+id/choose"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textColor="#FFFF00"
-                    android:textSize="15dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:text="Pilih Gambar" />
-            </TableRow>
-            <TableRow android:paddingTop="5dp">
-                <ImageView
-                    android:id="@+id/image_file"
-                    android:layout_width="100dp"
-                    android:layout_height="130dp"
-                    android:layout_marginLeft="90dp"
-                    android:layout_span="2"
-                    app:srcCompat="@mipmap/ic_launcher" />
-            </TableRow>
-            <TableRow android:paddingTop="5dp">
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Button
-                    android:id="@+id/kirim"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textColor="#FFFF00"
-                    android:textSize="20dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:text="Kirim" />
-            </TableRow>
+            <LinearLayout
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/Edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textColor="#FFFF00"
+                        android:textSize="20dp"
+                        android:background="#FF0000"
+                        android:text="edit" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/Cetak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FF0000"
+                        android:text="cetak"
+                        android:textAlignment="center"
+                        android:textColor="#FFFF00"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
         </TableLayout>
     </ScrollView>
+
 </android.widget.LinearLayout>

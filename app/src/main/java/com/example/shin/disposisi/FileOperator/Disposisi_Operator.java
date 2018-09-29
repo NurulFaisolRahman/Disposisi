@@ -1,4 +1,4 @@
-package com.example.shin.disposisi;
+package com.example.shin.disposisi.FileOperator;
 
 import android.Manifest;
 import android.support.v4.app.Fragment;
@@ -23,6 +23,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.shin.disposisi.R;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.UploadNotificationConfig;

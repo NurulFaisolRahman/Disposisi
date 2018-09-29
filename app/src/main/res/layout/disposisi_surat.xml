@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Disposisi_Surat">
+    tools:context=".FileKadis.Disposisi_Surat">
 
     <Button
         android:id="@+id/LihatSurat"

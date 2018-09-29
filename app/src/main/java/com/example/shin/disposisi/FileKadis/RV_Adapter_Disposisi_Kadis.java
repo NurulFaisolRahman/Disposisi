@@ -1,4 +1,4 @@
-package com.example.shin.disposisi;
+package com.example.shin.disposisi.FileKadis;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,13 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import com.example.shin.disposisi.R;
+import com.example.shin.disposisi.Surat;
 import java.util.List;
 
 public class RV_Adapter_Disposisi_Kadis extends RecyclerView.Adapter<RV_Adapter_Disposisi_Kadis.ViewHolderDisposisiKadis>{
 
-    Context ContextDisposisiKadis;
-    List<Surat> DataDisposisiKadis;
+    private Context ContextDisposisiKadis;
+    private List<Surat> DataDisposisiKadis;
 
     public RV_Adapter_Disposisi_Kadis(Context contextDisposisiKadis, List<Surat> dataDisposisiKadis) {
         ContextDisposisiKadis = contextDisposisiKadis;
@@ -36,7 +37,6 @@ public class RV_Adapter_Disposisi_Kadis extends RecyclerView.Adapter<RV_Adapter_
 //                viewHolderDisposisiKadis.getAdapterPosition()
             }
         });
-
         return viewHolderDisposisiKadis;
     }
 

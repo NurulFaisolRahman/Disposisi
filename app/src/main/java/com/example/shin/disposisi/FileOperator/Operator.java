@@ -1,4 +1,4 @@
-package com.example.shin.disposisi;
+package com.example.shin.disposisi.FileOperator;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,20 +12,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class Operator extends AppCompatActivity {
+import com.example.shin.disposisi.FileLogin.Login;
+import com.example.shin.disposisi.R;
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private ViewPagerAdapterOperator adapter;
+public class Operator extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.operator);
 
-        tabLayout = findViewById(R.id.TabFragmentUmum);
-        viewPager = findViewById(R.id.ViewPagerUmum);
-        adapter = new ViewPagerAdapterOperator(getSupportFragmentManager());
+        TabLayout tabLayout = findViewById(R.id.TabFragmentUmum);
+        ViewPager viewPager = findViewById(R.id.ViewPagerUmum);
+        ViewPagerAdapterOperator adapter = new ViewPagerAdapterOperator(getSupportFragmentManager());
 
         adapter.AddFragment(new Disposisi_Operator(),"Disposisi");
         adapter.AddFragment(new Arsip_Operator(),"Arsip");
@@ -60,7 +59,7 @@ public class Operator extends AppCompatActivity {
         SharedPreferences sharedPreferences =getSharedPreferences("login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 
     private void pindahActivity(){

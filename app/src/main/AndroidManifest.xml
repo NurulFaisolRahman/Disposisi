@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/TanpaJudul">
         <activity
-            android:name=".Login"
+            android:name=".FileLogin.Login"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,20 +21,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Operator"
+            android:name=".FileOperator.Operator"
             android:label="Operator"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".Kadis"
+            android:name=".FileKadis.Kadis"
             android:label="Kadis"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".Disposisi_Surat"
+            android:name=".FileKadis.Disposisi_Surat"
             android:label="Disposisi Surat"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FileBidang.Bidang"
+            android:label="Bidang"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".FileSeksi.Seksi" />
+        <activity
+            android:name=".FileOperator.DetailSurat"
+            android:label="Detail Surat"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
