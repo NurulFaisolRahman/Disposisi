@@ -23,12 +23,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.shin.disposisi.R;
+import com.example.shin.disposisi.Server;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.UploadNotificationConfig;
-
 import java.io.IOException;
 import java.util.UUID;
 
@@ -37,7 +36,6 @@ import static android.app.Activity.RESULT_OK;
 public class Disposisi_Operator extends Fragment implements View.OnClickListener {
 
     View v;
-
     Button c_file, kirim;
     EditText nomor_surat,surat_dari,tanggal_surat,diterima_tanggal,nomor_agenda,perihal;
     TextView choose;
@@ -48,7 +46,7 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
     private Uri filePath;
     private Bitmap bitmap;
     ImageView image;
-    private static final String UPLOAD_URL = "http://192.168.43.223/disposisi/upload.php";
+    private static final String UPLOAD_URL = Server.IP+"upload.php";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

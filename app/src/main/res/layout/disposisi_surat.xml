@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.797" />
 
     <Button
-        android:id="@+id/DisposisiSurat"
+        android:id="@+id/KadisMendisposisi"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -39,7 +39,7 @@
         app:layout_constraintVertical_bias="0.960" />
 
     <TextView
-        android:id="@+id/DiteruskanKe"
+        android:id="@+id/KadisMeneruskan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Diteruskan Kepada Sdr. :"
@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/IsiDisposisiKadis"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingTop="5dp"
-            android:text="Bidang Apikasi dan Informatika" />
+            android:text="Bidang Aplikasi dan Informatika" />
 
         <RadioButton
             android:id="@+id/SD-TIK"

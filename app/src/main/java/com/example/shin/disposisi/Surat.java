@@ -1,6 +1,24 @@
 package com.example.shin.disposisi;
 
 public class Surat {
+
+    private String nomor_surat,url,surat_dari,tanggal_surat,diterima_tanggal,nomor_agenda,sifat,perihal,status,isi_diposisi,bidang,seksi;
+
+    public Surat(String nomor_surat, String url, String surat_dari, String tanggal_surat, String diterima_tanggal, String nomor_agenda, String sifat, String perihal, String status, String isi_diposisi, String bidang, String seksi) {
+        this.nomor_surat = nomor_surat;
+        this.url = url;
+        this.surat_dari = surat_dari;
+        this.tanggal_surat = tanggal_surat;
+        this.diterima_tanggal = diterima_tanggal;
+        this.nomor_agenda = nomor_agenda;
+        this.sifat = sifat;
+        this.perihal = perihal;
+        this.status = status;
+        this.isi_diposisi = isi_diposisi;
+        this.bidang = bidang;
+        this.seksi = seksi;
+    }
+
     public String getNomor_surat() {
         return nomor_surat;
     }
@@ -37,6 +55,10 @@ public class Surat {
         return status;
     }
 
+    public String getIsi_diposisi() {
+        return isi_diposisi;
+    }
+
     public String getBidang() {
         return bidang;
     }
@@ -44,22 +66,4 @@ public class Surat {
     public String getSeksi() {
         return seksi;
     }
-
-    private String nomor_surat,url,surat_dari,tanggal_surat,diterima_tanggal,nomor_agenda,sifat,perihal,status,bidang,seksi;
-
-    public Surat(String nomor_surat, String url, String surat_dari, String tanggal_surat, String diterima_tanggal, String nomor_agenda, String sifat, String perihal, String status, String bidang, String seksi) {
-        this.nomor_surat = nomor_surat;
-        this.url = url;
-        this.surat_dari = surat_dari;
-        this.tanggal_surat = tanggal_surat;
-        this.diterima_tanggal = diterima_tanggal;
-        this.nomor_agenda = nomor_agenda;
-        this.sifat = sifat;
-        this.perihal = perihal;
-        this.status = status;
-        this.bidang = bidang;
-        this.seksi = seksi;
-    }
-
-
 }

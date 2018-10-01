@@ -17,6 +17,7 @@ public class RV_Adapter_Disposisi_Kadis extends RecyclerView.Adapter<RV_Adapter_
 
     private Context ContextDisposisiKadis;
     private List<Surat> DataDisposisiKadis;
+    public static String NomorSurat;
 
     public RV_Adapter_Disposisi_Kadis(Context contextDisposisiKadis, List<Surat> dataDisposisiKadis) {
         ContextDisposisiKadis = contextDisposisiKadis;
@@ -32,9 +33,9 @@ public class RV_Adapter_Disposisi_Kadis extends RecyclerView.Adapter<RV_Adapter_
         viewHolderDisposisiKadis.DisposisiKadis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NomorSurat = DataDisposisiKadis.get(viewHolderDisposisiKadis.getAdapterPosition()).getNomor_surat();
                 Intent Disposisi = new Intent(ContextDisposisiKadis, Disposisi_Surat.class);
                 ContextDisposisiKadis.startActivity(Disposisi);
-//                viewHolderDisposisiKadis.getAdapterPosition()
             }
         });
         return viewHolderDisposisiKadis;
