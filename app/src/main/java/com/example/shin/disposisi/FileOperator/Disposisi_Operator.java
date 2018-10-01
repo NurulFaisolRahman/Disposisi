@@ -1,18 +1,14 @@
 package com.example.shin.disposisi.FileOperator;
 
-import android.Manifest;
+import android.content.ClipData;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,48 +17,45 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
+import com.example.shin.disposisi.FileLogin.ApiClientLogin;
+import com.example.shin.disposisi.FormDisposisi;
 import com.example.shin.disposisi.R;
 import com.example.shin.disposisi.Server;
-
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.UploadNotificationConfig;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
 public class Disposisi_Operator extends Fragment implements View.OnClickListener {
 
     View v;
-    Button c_file, kirim;
+    Button PilihGambar, kirim;
     EditText nomor_surat,surat_dari,tanggal_surat,diterima_tanggal,nomor_agenda,perihal;
-    TextView choose;
     RadioGroup radio;
     RadioButton radio_button;
-    private static final int STORAGE_PERMISSION_CODE = 2342;
-    private static final int PICK_FILE_REQUEST = 22;
-    private Uri filePath;
+    private static final int PICK_IMAGE_MULTIPLE = 1;
     private Bitmap bitmap;
     ImageView image;
+    List<String> DaftarAlamatURI;
     private static final String UPLOAD_URL = Server.IP+"upload.php";
+    public static ApiDisposisiOperator apiInterface;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
-
-    public Disposisi_Operator() {
-
-
-    }
-
+    
     @Nullable
-
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.disposisi_operator,container,false);
-        c_file = v.findViewById(R.id.choose);
+        PilihGambar = v.findViewById(R.id.choose);
         kirim = v.findViewById(R.id.kirim);
         nomor_surat = v.findViewById(R.id.nomor_surat);
         surat_dari = v.findViewById(R.id.surat_dari);
@@ -72,58 +65,60 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
         perihal = v.findViewById(R.id.perihal);
         image = v.findViewById(R.id.image_file);
         radio = v.findViewById(R.id.radio);
+        apiInterface = ApiClientLogin.GetApiClient().create(ApiDisposisiOperator.class);
 
         radio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                radio_button= (RadioButton) v.findViewById(radioGroup.getCheckedRadioButtonId());
+                radio_button = v.findViewById(radioGroup.getCheckedRadioButtonId());
             }
         });
-
-        requestStoragePermission();
-        c_file.setOnClickListener(this);
+        
+        PilihGambar.setOnClickListener(this);
         kirim.setOnClickListener(this);
         return v;
-
     }
 
-    private void requestStoragePermission(){
-        if(ContextCompat.checkSelfPermission( getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-            return;
-        }
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISSION_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode==STORAGE_PERMISSION_CODE){
-            if(grantResults.length>0 && grantResults[0] ==  PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(getContext(), "Permession granted", Toast.LENGTH_LONG).show();
-            }else{
-                Toast.makeText(getContext(), "Permession not granted", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    private void showFileChooser(){
+    private void TampilkanGaleri(){
         Intent intent = new Intent();
         intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select File"), PICK_FILE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_MULTIPLE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
-            filePath = data.getData();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-                image.setImageBitmap(bitmap);
-            }catch (IOException e){
-
+        try {
+            // Cek Pilihan Gambar
+            if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == RESULT_OK && null != data) {
+                // Mendapatkan Gambar
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                DaftarAlamatURI = new ArrayList<>();
+                if(data.getData() != null){
+                    Uri mImageUri = data.getData();
+                    DaftarAlamatURI.add(getPath(mImageUri));
+                }
+                else {
+                    if (data.getClipData() != null) {
+                        ClipData mClipData = data.getClipData();
+                        for (int i = 0; i < mClipData.getItemCount(); i++) {
+                            ClipData.Item item = mClipData.getItemAt(i);
+                            Uri uri = item.getUri();
+                            DaftarAlamatURI.add(getPath(uri));
+                        }
+                        Toast.makeText(getContext(), "Gambar = "+ DaftarAlamatURI.size(), Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
+            else {
+                Toast.makeText(getContext(), "Anda Belum Memilih Gambar", Toast.LENGTH_LONG).show();
+            }
+        }
+        catch (Exception e) {
+            Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -141,44 +136,64 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
         return path;
     }
 
-    private void uploadImage(){
-        String path = getPath(filePath);
-        //Uploading code
+    private void UploadGambar(String Path,String Nomor_Surat){
         try {
             String uploadId = UUID.randomUUID().toString();
-            //Creating a multi part request
-            new MultipartUploadRequest(getContext(), uploadId, UPLOAD_URL)
-                    .addFileToUpload(path, "image") //Adding file
-                    .addParameter("nomor_surat", nomor_surat.getText().toString()) //Adding text parameter to the request
-                    .addParameter("surat_dari", surat_dari.getText().toString())
-                    .addParameter("tanggal_surat", tanggal_surat.getText().toString())
-                    .addParameter("diterima_tanggal", diterima_tanggal.getText().toString())
-                    .addParameter("nomor_agenda", nomor_agenda.getText().toString())
-                    .addParameter("sifat",radio_button.getText().toString())
-                    .addParameter("perihal", perihal.getText().toString())
-                    .setNotificationConfig(new UploadNotificationConfig())
-                    .setMaxRetries(2)
-                    .startUpload(); //Starting the upload
-
-        } catch (Exception exc) {
+                new MultipartUploadRequest(getContext(), uploadId, UPLOAD_URL)
+                        .addFileToUpload(Path, "image")
+                        .addParameter("nomor_surat", Nomor_Surat)
+                        .setNotificationConfig(new UploadNotificationConfig())
+                        .setMaxRetries(3)
+                        .startUpload(); //Starting the upload
+        }
+        catch (Exception exc) {
             Toast.makeText(getContext(), exc.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void UploadFormDisposisi(){
+        String NomorSurat = nomor_surat.getText().toString();
+        String SuratDari = surat_dari.getText().toString();
+        String TanggalSurat = tanggal_surat.getText().toString();
+        String DiterimaTanggal = diterima_tanggal.getText().toString();
+        String NomorAgenda = nomor_agenda.getText().toString();
+        String Sifat = radio_button.getText().toString();
+        String Perihal = perihal.getText().toString();
+        Call<FormDisposisi> call = apiInterface.DisposisiOperator(NomorSurat,SuratDari,TanggalSurat,DiterimaTanggal,NomorAgenda,Sifat,Perihal);
+        call.enqueue(new Callback<FormDisposisi>() {
+            @Override
+            public void onResponse(Call<FormDisposisi> call, Response<FormDisposisi> response) {
+                if (response.body().getRespon().equals("sukses")){
+                    Toast.makeText(getContext(), "Disposisi Sukses", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FormDisposisi> call, Throwable t) {
+                Toast.makeText(getContext(), "Mohon Cek Internet", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
         if(v == kirim){
-            uploadImage();
+            UploadFormDisposisi();
+            for (int i = 0; i < DaftarAlamatURI.size(); i++) {
+                UploadGambar(DaftarAlamatURI.get(i), nomor_surat.getText().toString());
+            }
+            DaftarAlamatURI.clear();
             nomor_surat.setText("");
             surat_dari.setText("");
             tanggal_surat.setText("");
             diterima_tanggal.setText("");
             nomor_agenda.setText("");
             perihal.setText("");
+            radio.clearCheck();
         }
-        if (v == c_file) {
+        if (v == PilihGambar) {
             Toast.makeText(getContext(),"pilih gambar", Toast.LENGTH_SHORT).show();
-            showFileChooser();
+            TampilkanGaleri();
         }
     }
 }
