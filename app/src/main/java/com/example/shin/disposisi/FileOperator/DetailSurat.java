@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.shin.disposisi.R;
+import com.example.shin.disposisi.Server;
 
 public class DetailSurat extends AppCompatActivity {
 
@@ -43,15 +45,17 @@ public class DetailSurat extends AppCompatActivity {
         Cetak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Download = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                Uri uri = Uri.parse("http://192.168.43.223/disposisi/CetakPDF.php?NomorSurat="+RV_Adapter_Arsip_Operator.NomorSurat);
-                DownloadManager.Request request = new DownloadManager.Request(uri);
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Disposisi_"+RV_Adapter_Arsip_Operator.NomorSurat+".pdf");
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                Download.enqueue(request);
+                if (RV_Adapter_Arsip_Operator.Status.equals("Disposisi")) {
+                    Download = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                    Uri uri = Uri.parse(Server.IP + "CetakPDF.php?NomorSurat=" + RV_Adapter_Arsip_Operator.NomorSurat);
+                    DownloadManager.Request request = new DownloadManager.Request(uri);
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Disposisi_" + RV_Adapter_Arsip_Operator.NomorSurat + ".pdf");
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    Download.enqueue(request);
+                } else {
+                    Toast.makeText(DetailSurat.this, "Surat Belum Di Disposisi", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-
     }
 }

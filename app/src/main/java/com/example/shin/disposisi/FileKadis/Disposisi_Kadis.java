@@ -59,6 +59,12 @@ public class Disposisi_Kadis extends Fragment{
         TampilkanDisposisi();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        TampilkanDisposisi();
+    }
+
     private void TampilkanDisposisi(){
         DataDisposisiKadis = new ArrayList<>();
 
@@ -81,7 +87,7 @@ public class Disposisi_Kadis extends Fragment{
 
             @Override
             public void onFailure(Call<List<Surat>> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

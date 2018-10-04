@@ -18,7 +18,7 @@ import java.util.List;
 
 public class RV_Adapter_Arsip_Operator extends RecyclerView.Adapter<RV_Adapter_Arsip_Operator.ViewHolderArsipOperator>{
 
-    static String SuratDari,TanggalSurat,NomorSurat,DiterimaTanggal,NomorAgenda,Sifat,Perihal;
+    static String SuratDari, TanggalSurat, NomorSurat, DiterimaTanggal, NomorAgenda, Sifat, Perihal, Status;
     private Context ContextArsipOperator;
     private List<Surat> DataArsipOperator;
 
@@ -43,6 +43,7 @@ public class RV_Adapter_Arsip_Operator extends RecyclerView.Adapter<RV_Adapter_A
                 NomorAgenda = DataArsipOperator.get(viewHolderArsipOperator.getAdapterPosition()).getNomor_agenda();
                 Sifat = DataArsipOperator.get(viewHolderArsipOperator.getAdapterPosition()).getSifat();
                 Perihal = DataArsipOperator.get(viewHolderArsipOperator.getAdapterPosition()).getPerihal();
+                Status = DataArsipOperator.get(viewHolderArsipOperator.getAdapterPosition()).getStatus();
                 Intent DetailSurat = new Intent(ContextArsipOperator, DetailSurat.class);
                 ContextArsipOperator.startActivity(DetailSurat);
             }

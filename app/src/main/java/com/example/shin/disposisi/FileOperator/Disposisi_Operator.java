@@ -1,22 +1,26 @@
 package com.example.shin.disposisi.FileOperator;
 
+import android.Manifest;
 import android.content.ClipData;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.shin.disposisi.FileLogin.ApiClientLogin;
 import com.example.shin.disposisi.FormDisposisi;
@@ -30,7 +34,6 @@ import java.util.UUID;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import static android.app.Activity.RESULT_OK;
 
 public class Disposisi_Operator extends Fragment implements View.OnClickListener {
@@ -38,18 +41,17 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
     View v;
     Button PilihGambar, kirim;
     EditText nomor_surat,surat_dari,tanggal_surat,diterima_tanggal,nomor_agenda,perihal;
+    TextView JumlahFoto;
     RadioGroup radio;
     RadioButton radio_button;
+    private static final int STORAGE_PERMISSION_CODE = 2342;
     private static final int PICK_IMAGE_MULTIPLE = 1;
-    private Bitmap bitmap;
-    ImageView image;
     List<String> DaftarAlamatURI;
     private static final String UPLOAD_URL = Server.IP+"upload.php";
     public static ApiDisposisiOperator apiInterface;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
     
     @Nullable
@@ -63,10 +65,9 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
         diterima_tanggal = v.findViewById(R.id.diterima_tanggal);
         nomor_agenda = v.findViewById(R.id.nomor_agenda);
         perihal = v.findViewById(R.id.perihal);
-        image = v.findViewById(R.id.image_file);
+        JumlahFoto = v.findViewById(R.id.JumlahFoto);
         radio = v.findViewById(R.id.radio);
         apiInterface = ApiClientLogin.GetApiClient().create(ApiDisposisiOperator.class);
-
         radio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
@@ -74,10 +75,28 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
                 radio_button = v.findViewById(radioGroup.getCheckedRadioButtonId());
             }
         });
-        
+        requestStoragePermission();
         PilihGambar.setOnClickListener(this);
         kirim.setOnClickListener(this);
         return v;
+    }
+
+    private void requestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "Permession granted", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getContext(), "Permession not granted", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void TampilkanGaleri(){
@@ -95,7 +114,6 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
             // Cek Pilihan Gambar
             if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == RESULT_OK && null != data) {
                 // Mendapatkan Gambar
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
                 DaftarAlamatURI = new ArrayList<>();
                 if(data.getData() != null){
                     Uri mImageUri = data.getData();
@@ -109,12 +127,11 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
                             Uri uri = item.getUri();
                             DaftarAlamatURI.add(getPath(uri));
                         }
-                        Toast.makeText(getContext(), "Gambar = "+ DaftarAlamatURI.size(), Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
-            else {
-                Toast.makeText(getContext(), "Anda Belum Memilih Gambar", Toast.LENGTH_LONG).show();
+                JumlahFoto.setText("  Jumlah Foto = " + DaftarAlamatURI.size() + " Foto");
+            } else {
+                JumlahFoto.setText("  Anda Belum Input Foto");
             }
         }
         catch (Exception e) {
@@ -143,7 +160,7 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
                         .addFileToUpload(Path, "image")
                         .addParameter("nomor_surat", Nomor_Surat)
                         .setNotificationConfig(new UploadNotificationConfig())
-                        .setMaxRetries(3)
+                        .setMaxRetries(1)
                         .startUpload(); //Starting the upload
         }
         catch (Exception exc) {
@@ -189,10 +206,10 @@ public class Disposisi_Operator extends Fragment implements View.OnClickListener
             diterima_tanggal.setText("");
             nomor_agenda.setText("");
             perihal.setText("");
+            JumlahFoto.setText("  Anda Belum Input Foto");
             radio.clearCheck();
         }
         if (v == PilihGambar) {
-            Toast.makeText(getContext(),"pilih gambar", Toast.LENGTH_SHORT).show();
             TampilkanGaleri();
         }
     }

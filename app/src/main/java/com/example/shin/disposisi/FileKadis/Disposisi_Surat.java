@@ -18,7 +18,7 @@ import retrofit2.Response;
 public class Disposisi_Surat extends AppCompatActivity {
 
     String NomorSurat;
-    Button KadisMendisposisi;
+    Button KadisMendisposisi, LihatSurat;
     EditText IsiDisposisiKadis;
     RadioGroup Bidang;
     RadioButton NamaBidang;
@@ -31,6 +31,7 @@ public class Disposisi_Surat extends AppCompatActivity {
 
         NomorSurat = RV_Adapter_Disposisi_Kadis.NomorSurat;
         KadisMendisposisi = findViewById(R.id.KadisMendisposisi);
+        LihatSurat = findViewById(R.id.LihatSurat);
         IsiDisposisiKadis = findViewById(R.id.IsiDisposisiKadis);
         Bidang = findViewById(R.id.Bidang);
         apiInterface = ApiClientLogin.GetApiClient().create(ApiMendisposisi.class);
@@ -65,7 +66,8 @@ public class Disposisi_Surat extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<KadisMendisposisi> call, Response<KadisMendisposisi> response) {
                         if (response.body().getRespon().equals("sukses")){
-                            Toast.makeText(Disposisi_Surat.this, "Sukses", Toast.LENGTH_SHORT).show();
+                            finish();
+                            Toast.makeText(Disposisi_Surat.this, "Disposisi Sukses", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -74,6 +76,13 @@ public class Disposisi_Surat extends AppCompatActivity {
                         Toast.makeText(Disposisi_Surat.this, "Mohon Cek Koneksi Internet", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        LihatSurat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

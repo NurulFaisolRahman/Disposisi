@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import com.example.shin.disposisi.R;
 import com.example.shin.disposisi.Surat;
 import java.util.ArrayList;
@@ -62,7 +61,6 @@ public class Arsip_Operator extends Fragment {
     private void TampilkanArsip(){
         DataArsipOperator = new ArrayList<>();
 
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiArsipOperator.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -82,7 +80,7 @@ public class Arsip_Operator extends Fragment {
 
             @Override
             public void onFailure(Call<List<Surat>> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

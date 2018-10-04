@@ -36,4 +36,6 @@ public class ViewPagerAdapterKadis extends FragmentPagerAdapter {
         ListFragment.add(fragment);
         ListJudul.add(judul);
     }
+
+
 }
